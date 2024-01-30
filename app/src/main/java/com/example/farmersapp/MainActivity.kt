@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.animation.doOnEnd
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.example.farmersapp.App.FarmersApp
 import com.example.farmersapp.SplashScreen.MainViewModel
 import com.example.farmersapp.ui.theme.FarmersAppTheme
 
@@ -74,10 +75,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
+    FarmersApp()
 }
 
 @Preview(showBackground = true)
