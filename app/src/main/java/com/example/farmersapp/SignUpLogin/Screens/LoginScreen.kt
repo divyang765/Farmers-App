@@ -30,12 +30,14 @@ import com.example.farmersapp.SignUpLogin.ButtonComponent
 import com.example.farmersapp.SignUpLogin.ClickableTextComponent
 import com.example.farmersapp.SignUpLogin.DividerTextComponent
 import com.example.farmersapp.SignUpLogin.HeadingTextComponent
+import com.example.farmersapp.SignUpLogin.LoginUiEvents
 import com.example.farmersapp.SignUpLogin.MyTextField
 import com.example.farmersapp.SignUpLogin.PasswordTextField
 import com.example.farmersapp.SignUpLogin.UnderLinedTextComponent
+import com.example.farmersapp.SignUpLogin.ViewModels.LoginViewModel
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(loginViewModel: LoginViewModel = LoginViewModel()) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -50,9 +52,20 @@ fun LoginScreen() {
             HeadingTextComponent(value = "LOGIN")
             HeadingTextComponent(value = "Welcome Back")
             Spacer(modifier = Modifier.height(25.dp))
-            MyTextField(labelValue = " Email", imageVector = Icons.Default.Email)
+            MyTextField(
+                labelValue = " Email",
+                imageVector = Icons.Default.Email,
+                onTextSelected = {
+                    loginViewModel.onEvent(
+                        LoginUiEvents.emailChanged(it)
+                    )
+                })
             Spacer(modifier = Modifier.height(10.dp))
-            PasswordTextField(labelValue = "Password")
+            PasswordTextField(labelValue = "Password", onTextSelected = {
+                loginViewModel.onEvent(
+                    LoginUiEvents.passwordChanged(it)
+                )
+            })
             Spacer(modifier = Modifier.height(20.dp))
             UnderLinedTextComponent(value = "Forgot Password")
             Spacer(modifier = Modifier.height(20.dp))

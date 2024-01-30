@@ -34,9 +34,11 @@ import com.example.farmersapp.SignUpLogin.ClickableTextComponent
 import com.example.farmersapp.SignUpLogin.HeadingTextComponent
 import com.example.farmersapp.SignUpLogin.MyTextField
 import com.example.farmersapp.SignUpLogin.PasswordTextField
+import com.example.farmersapp.SignUpLogin.SignUpUiEvents
+import com.example.farmersapp.SignUpLogin.ViewModels.SignInViewModel
 
 @Composable
-fun SignUpScreen() {
+fun SignUpScreen(signInViewModel: SignInViewModel = SignInViewModel()) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -57,10 +59,30 @@ fun SignUpScreen() {
 
             HeadingTextComponent(value = "Join Today ")
             Spacer(modifier = Modifier.height(10.dp))
-            MyTextField(labelValue = " First Name")
-            MyTextField(labelValue = " Last Name")
-            MyTextField(labelValue = " Email", imageVector = Icons.Default.Email)
-            PasswordTextField(labelValue = "Password")
+            MyTextField(labelValue = " First Name", onTextSelected = {
+                signInViewModel.onEvent(
+                    SignUpUiEvents.firstNameChanged(it)
+                )
+
+            })
+            MyTextField(labelValue = " Last Name", onTextSelected = {
+                signInViewModel.onEvent(
+                    SignUpUiEvents.lastNameChanged(it)
+                )
+            })
+            MyTextField(
+                labelValue = " Email",
+                imageVector = Icons.Default.Email,
+                onTextSelected = {
+                    signInViewModel.onEvent(
+                        SignUpUiEvents.emailChanged(it)
+                    )
+                })
+            PasswordTextField(labelValue = "Password", onTextSelected = {
+                signInViewModel.onEvent(
+                    SignUpUiEvents.passwordChanged(it)
+                )
+            })
             Spacer(modifier = Modifier.height(30.dp))
             ButtonComponent(value = "Sign Up")
             Spacer(modifier = Modifier.height(30.dp))

@@ -57,7 +57,11 @@ fun HeadingTextComponent(value: String) {
 }
 
 @Composable
-fun MyTextField(labelValue: String, imageVector: ImageVector = Icons.Default.Person) {
+fun MyTextField(
+    labelValue: String,
+    imageVector: ImageVector = Icons.Default.Person,
+    onTextSelected: (String) -> Unit
+) {
 
     val textValue = remember {
         mutableStateOf("")
@@ -84,11 +88,20 @@ fun MyTextField(labelValue: String, imageVector: ImageVector = Icons.Default.Per
                 contentDescription = null
             )
         },
-        onValueChange = { textValue.value = it })
+        onValueChange = {
+            textValue.value = it
+
+            onTextSelected(it)
+        }
+    )
 }
 
 @Composable
-fun PasswordTextField(labelValue: String, imageVector: ImageVector = Icons.Default.Lock) {
+fun PasswordTextField(
+    labelValue: String,
+    imageVector: ImageVector = Icons.Default.Lock,
+    onTextSelected: (String) -> Unit
+) {
     val password = remember {
         mutableStateOf("")
     }
@@ -100,7 +113,10 @@ fun PasswordTextField(labelValue: String, imageVector: ImageVector = Icons.Defau
             .fillMaxWidth()
             .padding(5.dp),
         value = password.value,
-        onValueChange = { password.value = it },
+        onValueChange = {
+            password.value = it
+            onTextSelected(it)
+        },
         label = { Text(text = labelValue, fontSize = 17.sp, fontWeight = FontWeight.Black) },
         leadingIcon = {
             Icon(
@@ -172,6 +188,7 @@ fun UnderLinedTextComponent(value: String) {
         )
     )
 }
+
 @Composable
 fun DividerTextComponent() {
     Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {

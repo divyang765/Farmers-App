@@ -72,4 +72,7 @@ dependencies {
 
 //Extended Icons
     implementation("androidx.compose.material:material-icons-extended-android:1.6.0")
+
+//ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel:2.7.0")
 }
