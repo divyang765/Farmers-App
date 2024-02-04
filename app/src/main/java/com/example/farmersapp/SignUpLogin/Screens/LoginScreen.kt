@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -27,6 +28,7 @@ import com.example.farmersapp.App.Screen
 import com.example.farmersapp.App.SystemBackButtonHandler
 import com.example.farmersapp.R
 import com.example.farmersapp.SignUpLogin.ButtonComponent
+import com.example.farmersapp.SignUpLogin.CircularIndeterminateProgressBar
 import com.example.farmersapp.SignUpLogin.ClickableTextComponent
 import com.example.farmersapp.SignUpLogin.DividerTextComponent
 import com.example.farmersapp.SignUpLogin.HeadingTextComponent
@@ -69,7 +71,9 @@ fun LoginScreen(loginViewModel: LoginViewModel = LoginViewModel()) {
             Spacer(modifier = Modifier.height(20.dp))
             UnderLinedTextComponent(value = "Forgot Password")
             Spacer(modifier = Modifier.height(20.dp))
-            ButtonComponent(value = "Login")
+            ButtonComponent(
+                value = "Login",
+                onClicked = { loginViewModel.onEvent(LoginUiEvents.registerButtonClicked) })
             Spacer(modifier = Modifier.height(10.dp))
             DividerTextComponent()
             Spacer(modifier = Modifier.height(10.dp))
@@ -85,6 +89,9 @@ fun LoginScreen(loginViewModel: LoginViewModel = LoginViewModel()) {
                 value = buildAnnotatedString { append("Sign In ") },
                 onTextSelected = { FarmersAppRouter.navigateTo(Screen.SignUpScreen) }
             )
+        }
+        if (loginViewModel.LoginInProgress.value) {
+            CircularIndeterminateProgressBar()
         }
     }
     SystemBackButtonHandler {
