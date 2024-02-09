@@ -1,5 +1,6 @@
 package com.example.farmersapp.SignUpLogin.Screens
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -35,6 +36,8 @@ import com.example.farmersapp.SignUpLogin.HeadingTextComponent
 import com.example.farmersapp.SignUpLogin.LoginUiEvents
 import com.example.farmersapp.SignUpLogin.MyTextField
 import com.example.farmersapp.SignUpLogin.PasswordTextField
+import com.example.farmersapp.SignUpLogin.SnackbarWithoutScaffold
+import com.example.farmersapp.SignUpLogin.TopCard
 import com.example.farmersapp.SignUpLogin.UnderLinedTextComponent
 import com.example.farmersapp.SignUpLogin.ViewModels.LoginViewModel
 
@@ -44,15 +47,22 @@ fun LoginScreen(loginViewModel: LoginViewModel = LoginViewModel()) {
         modifier = Modifier
             .fillMaxSize()
 
-            .paint(
-                painterResource(id = R.drawable.loginscreen),
-                contentScale = ContentScale.FillBounds
-            )
-            .padding(20.dp)
+//            .paint(
+//                painterResource(id = R.drawable.loginscreen),
+//                contentScale = ContentScale.FillBounds
+//            )
+//            .padding(20.dp)
     ) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            HeadingTextComponent(value = "LOGIN")
-            HeadingTextComponent(value = "Welcome Back")
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier
+                .fillMaxSize()
+                .background(
+                    Color(7, 63, 44, 255)
+                )
+        ) {
+            TopCard(value = "Login")
+
             Spacer(modifier = Modifier.height(25.dp))
             MyTextField(
                 labelValue = " Email",
@@ -70,10 +80,13 @@ fun LoginScreen(loginViewModel: LoginViewModel = LoginViewModel()) {
             })
             Spacer(modifier = Modifier.height(20.dp))
             UnderLinedTextComponent(value = "Forgot Password")
-            Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.height(10.dp))
             ButtonComponent(
                 value = "Login",
-                onClicked = { loginViewModel.onEvent(LoginUiEvents.registerButtonClicked) })
+                onClicked = {
+                    loginViewModel.onEvent(LoginUiEvents.registerButtonClicked)
+
+                })
             Spacer(modifier = Modifier.height(10.dp))
             DividerTextComponent()
             Spacer(modifier = Modifier.height(10.dp))
@@ -89,13 +102,18 @@ fun LoginScreen(loginViewModel: LoginViewModel = LoginViewModel()) {
                 value = buildAnnotatedString { append("Sign In ") },
                 onTextSelected = { FarmersAppRouter.navigateTo(Screen.SignUpScreen) }
             )
+            if (!loginViewModel.allValidataionsPassed.value)
+                SnackbarWithoutScaffold(
+                    message = "Invalid Credentials",
+                    showSb = true,
+                    openSnackbar = {})
         }
         if (loginViewModel.LoginInProgress.value) {
             CircularIndeterminateProgressBar()
         }
     }
     SystemBackButtonHandler {
-        FarmersAppRouter.navigateTo(Screen.SignUpScreen)
+        FarmersAppRouter.navigateTo(Screen.MainScreen)
     }
 }
 

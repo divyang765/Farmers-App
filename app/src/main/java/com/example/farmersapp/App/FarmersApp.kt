@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.example.farmersapp.SignUpLogin.Screens.HomeScreen
 import com.example.farmersapp.SignUpLogin.Screens.LoginScreen
+import com.example.farmersapp.SignUpLogin.Screens.MainScreen
 
 import com.example.farmersapp.SignUpLogin.Screens.SignUpScreen
 
@@ -28,6 +29,10 @@ fun FarmersApp() {
 
                 is Screen.HomeScreen -> {
                     HomeScreen()
+                }
+
+                is Screen.MainScreen -> {
+                    MainScreen()
                 }
 
             }

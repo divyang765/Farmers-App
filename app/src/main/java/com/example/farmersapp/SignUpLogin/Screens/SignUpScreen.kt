@@ -1,6 +1,6 @@
 package com.example.farmersapp.SignUpLogin.Screens
 
-import android.support.v4.os.IResultReceiver2.Default
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,6 +17,7 @@ import androidx.compose.material3.ProgressIndicatorDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -34,15 +35,20 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.farmersapp.App.FarmersAppRouter
 import com.example.farmersapp.App.Screen
+import com.example.farmersapp.App.SystemBackButtonHandler
 import com.example.farmersapp.R
+
 import com.example.farmersapp.SignUpLogin.ButtonComponent
 import com.example.farmersapp.SignUpLogin.CircularIndeterminateProgressBar
 import com.example.farmersapp.SignUpLogin.ClickableTextComponent
+import com.example.farmersapp.SignUpLogin.HeadingTextBlock
 import com.example.farmersapp.SignUpLogin.HeadingTextComponent
 import com.example.farmersapp.SignUpLogin.MyTextField
 import com.example.farmersapp.SignUpLogin.PasswordTextField
 import com.example.farmersapp.SignUpLogin.SignUpUiEvents
 import com.example.farmersapp.SignUpLogin.SnackbarWithoutScaffold
+import com.example.farmersapp.SignUpLogin.TopCard
+
 import com.example.farmersapp.SignUpLogin.ViewModels.SignInViewModel
 
 @Composable
@@ -61,34 +67,41 @@ fun SignUpScreen(signInViewModel: SignInViewModel = SignInViewModel()) {
             modifier = Modifier
                 .fillMaxSize()
 
+
         ) {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .paint(
-                        painterResource(id = R.drawable.signupscreen),
-                        contentScale = ContentScale.FillBounds
-                    )
-                    .padding(10.dp),
+//                    .paint(
+//                        painterResource(id = R.drawable.signupscreen),
+//                        contentScale = ContentScale.FillBounds
+//                    )
+
+                    .background(Color(7, 63, 44, 255))
+//                    .padding(10.dp)
+                ,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                HeadingTextComponent(value = "Greetings")
+
+                TopCard(value = "Sign Up Now")
 
                 Spacer(modifier = Modifier.height(20.dp))
 
-                HeadingTextComponent(value = "Join Today ")
-                Spacer(modifier = Modifier.height(10.dp))
+
+                Spacer(modifier = Modifier.height(15.dp))
                 MyTextField(labelValue = " First Name", onTextSelected = {
                     signInViewModel.onEvent(
                         SignUpUiEvents.firstNameChanged(it)
                     )
 
                 })
+                Spacer(modifier = Modifier.height(15.dp))
                 MyTextField(labelValue = " Last Name", onTextSelected = {
                     signInViewModel.onEvent(
                         SignUpUiEvents.lastNameChanged(it)
                     )
                 })
+                Spacer(modifier = Modifier.height(15.dp))
                 MyTextField(
                     labelValue = " Email",
                     imageVector = Icons.Default.Email,
@@ -97,18 +110,25 @@ fun SignUpScreen(signInViewModel: SignInViewModel = SignInViewModel()) {
                             SignUpUiEvents.emailChanged(it)
                         )
                     })
+                Spacer(modifier = Modifier.height(15.dp))
                 PasswordTextField(labelValue = "Password", onTextSelected = {
                     signInViewModel.onEvent(
                         SignUpUiEvents.passwordChanged(it)
                     )
                 })
-                Spacer(modifier = Modifier.height(30.dp))
+                Spacer(modifier = Modifier.height(15.dp))
+
+
+
                 ButtonComponent(
                     value = "Sign Up",
                     onClicked = {
                         signInViewModel.onEvent(SignUpUiEvents.registerButtonClicked)
 
-                    })
+                    }
+                )
+
+
 
                 Spacer(modifier = Modifier.height(30.dp))
                 Text(
@@ -122,6 +142,11 @@ fun SignUpScreen(signInViewModel: SignInViewModel = SignInViewModel()) {
                 ClickableTextComponent(buildAnnotatedString { append("Login") }, onTextSelected = {
                     FarmersAppRouter.navigateTo(Screen.LoginScreen)
                 })
+                if (!signInViewModel.allValidataionsPassed.value)
+                    SnackbarWithoutScaffold(
+                        message = "Invalid Details",
+                        showSb = true,
+                        openSnackbar = {})
 
 
             }
@@ -133,7 +158,9 @@ fun SignUpScreen(signInViewModel: SignInViewModel = SignInViewModel()) {
         }
 
     }
-
+    SystemBackButtonHandler {
+        FarmersAppRouter.navigateTo(Screen.MainScreen)
+    }
 }
 
 

@@ -20,7 +20,7 @@ import kotlinx.coroutines.launch
 class LoginViewModel : ViewModel() {
     var loginUIState = mutableStateOf(LoginUIState())
     val LoginInProgress = mutableStateOf(false)
-
+    var allValidataionsPassed = mutableStateOf(true)
 
     fun onEvent(event: LoginUiEvents) {
         when (event) {
@@ -38,8 +38,9 @@ class LoginViewModel : ViewModel() {
 
                 if (loginUIState.value.email.isNotEmpty() && loginUIState.value.password.isNotEmpty()) {
                     login()
-                } else {
 
+                } else {
+                    allValidataionsPassed.value = false
                 }
 
             }
@@ -68,9 +69,11 @@ class LoginViewModel : ViewModel() {
                 }
             }
             .addOnFailureListener {
+                allValidataionsPassed.value=false
                 LoginInProgress.value = false
                 Log.d("Taga", "Inside Login Failure")
                 Log.d("Taga", "${it.localizedMessage}")
+
             }
     }
 }

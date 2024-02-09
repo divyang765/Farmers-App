@@ -16,7 +16,7 @@ import com.google.firebase.auth.FirebaseAuth
 
 class SignInViewModel : ViewModel() {
     var registrationUiState = mutableStateOf(RegistrationUiState())
-    var allValidataionsPassed = mutableStateOf(false)
+    var allValidataionsPassed = mutableStateOf(true)
     val signUpInProgress = mutableStateOf(false)
 
 
@@ -66,12 +66,13 @@ class SignInViewModel : ViewModel() {
         onPrintState()
 
         if (registrationUiState.value.firstName.isNotEmpty() && registrationUiState.value.lastName.isNotEmpty() && registrationUiState.value.email.isNotEmpty() && registrationUiState.value.password.isNotEmpty()) {
+            allValidataionsPassed.value = true
             createUserInFireBase(
                 email = registrationUiState.value.email,
                 password = registrationUiState.value.password
             )
         } else {
-
+            allValidataionsPassed.value = false
 
         }
 
@@ -94,6 +95,9 @@ class SignInViewModel : ViewModel() {
             }.addOnFailureListener {
                 Log.d("Tag", "Inside not completed  listener ")
                 Log.d("Tag", "isSuccessful= ${it.message}")
+                signUpInProgress.value = false
+                allValidataionsPassed.value = false
+
             }
     }
 
