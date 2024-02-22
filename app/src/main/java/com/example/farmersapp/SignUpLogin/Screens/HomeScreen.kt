@@ -7,9 +7,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AttachMoney
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Newspaper
 import androidx.compose.material.icons.filled.WbSunny
 import androidx.compose.material.icons.outlined.AttachMoney
+import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.Newspaper
 import androidx.compose.material.icons.outlined.WbSunny
 import androidx.compose.material3.Icon
@@ -33,9 +35,11 @@ import androidx.navigation.compose.rememberNavController
 
 import com.example.farmersapp.App.Screen
 import com.example.farmersapp.NewsApp.Screens.ApmcScreen
+import com.example.farmersapp.NewsApp.Screens.FavouriteScreen
 import com.example.farmersapp.NewsApp.Screens.NewsScreen
 import com.example.farmersapp.NewsApp.Screens.WeatherScreen
 import com.example.farmersapp.NewsApp.models.BottomNavigationItems
+import com.example.farmersapp.NewsApp.models.NewsViewModel
 import com.example.farmersapp.SignUpLogin.ButtonComponent
 import com.example.farmersapp.SignUpLogin.HeadingTextComponent
 import com.example.farmersapp.SignUpLogin.ViewModels.SignInViewModel
@@ -52,13 +56,19 @@ fun HomeScreen(signInViewModel: SignInViewModel = SignInViewModel()) {
 
             ),
         BottomNavigationItems(
+            title = "Favourites",
+            selectedIcon = Icons.Filled.Favorite,
+            unSelectedIcon = Icons.Outlined.Favorite,
+
+            ),
+        BottomNavigationItems(
             title = "Weather",
             selectedIcon = Icons.Filled.WbSunny,
             unSelectedIcon = Icons.Outlined.WbSunny,
 
             ),
         BottomNavigationItems(
-            title = "Apmc",
+            title = "Apmc Prices",
             selectedIcon = Icons.Filled.AttachMoney,
             unSelectedIcon = Icons.Outlined.AttachMoney,
 
@@ -77,7 +87,7 @@ fun HomeScreen(signInViewModel: SignInViewModel = SignInViewModel()) {
     ) {
         val navController = rememberNavController()
         Scaffold(bottomBar = {
-            NavigationBar(containerColor = Color(7, 63, 44, 255)) {
+            NavigationBar(containerColor = Color(6, 53, 37, 255)) {
                 items.forEachIndexed { index, item ->
                     NavigationBarItem(
                         selected = selectedItemIndex == index,
@@ -103,15 +113,21 @@ fun HomeScreen(signInViewModel: SignInViewModel = SignInViewModel()) {
         }) {
             NavHost(navController = navController, startDestination = "News") {
                 composable("News") {
-                    NewsScreen()
+                    NewsScreen(
+                        viewModel = NewsViewModel()
+
+                    )
+
                 }
                 composable("Weather") {
                     WeatherScreen()
                 }
-                composable("Apmc") {
+                composable("Apmc Prices") {
                     ApmcScreen()
                 }
-
+                composable("Favourites") {
+                    FavouriteScreen()
+                }
             }
         }
 

@@ -68,16 +68,16 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
-    implementation("androidx.compose.material3:material3-android:1.2.0-alpha10")
+    implementation("androidx.compose.material3:material3-android:1.2.0")
 
     //Splash Screen
     implementation("androidx.core:core-splashscreen:1.0.1")
 
 //Extended Icons
-    implementation("androidx.compose.material:material-icons-extended-android:1.6.0")
+    implementation("androidx.compose.material:material-icons-extended-android:1.6.1")
 
 //ViewModel
-    implementation("androidx.lifecycle:lifecycle-viewmodel:2.7.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
 
 
     // Import the BoM for the Firebase platform
@@ -86,4 +86,9 @@ dependencies {
     // Add the dependency for the Firebase Authentication library
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation("com.google.firebase:firebase-auth")
+
+
+    implementation("io.coil-kt:coil-compose:2.4.0")
+// VOLLEY FOR NEWS API
+    implementation("com.android.volley:volley:1.2.1")
 }
