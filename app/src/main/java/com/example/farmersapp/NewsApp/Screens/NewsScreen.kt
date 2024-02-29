@@ -1,7 +1,9 @@
 package com.example.farmersapp.NewsApp.Screens
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -44,6 +46,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.example.farmersapp.NewsApp.Activity.NewsDetailsActivity
 import com.example.farmersapp.NewsApp.models.Article
 import com.example.farmersapp.NewsApp.models.BottomNavigationItems
 import com.example.farmersapp.NewsApp.models.NewsViewModel
@@ -96,13 +99,24 @@ fun ShowSearchBar(viewModel: NewsViewModel) {
 
 @Composable
 fun ShowNewsList(article: List<Article>, viewModel: NewsViewModel) {
+    val context = LocalContext.current
     Column {
         ShowSearchBar(viewModel = viewModel)
         LazyColumn {
             items(article) {
                 Row(
                     horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.clickable {
+
+                        val intent = Intent(context, NewsDetailsActivity::class.java).apply {
+                            putExtra("url", it.url)
+                            putExtra("title", it.title)
+                            putExtra("image", it.image)
+                            putExtra("description", it.description)
+                        }
+                        context.startActivity(intent)
+                    }
                 ) {
                     AsyncImage(
                         model = it.image,
