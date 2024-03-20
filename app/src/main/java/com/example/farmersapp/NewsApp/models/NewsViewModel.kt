@@ -18,7 +18,7 @@ class NewsViewModel : ViewModel() {
     fun fetchNewsData(newsQuery: String, context: Context) {
         val newsList = mutableListOf<Article>()
         val categoryNews: String = newsQuery.ifEmpty {
-            "Farming"
+            "Agriculture"
         }
         val url = "https://gnews.io/api/v4/search?q=$categoryNews&lang=en&apikey=${API_KEY}"
         val JsonObjectRequest = JsonObjectRequest(

@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">FarmersApp</string>
+    <string name="app_name">AgriConnect</string>
     <string name="title_activity_news_details">NewsDetailsActivity</string>
 </resources>

@@ -55,12 +55,12 @@ fun HomeScreen(signInViewModel: SignInViewModel = SignInViewModel()) {
             unSelectedIcon = Icons.Outlined.Newspaper,
 
             ),
-        BottomNavigationItems(
-            title = "Favourites",
-            selectedIcon = Icons.Filled.Favorite,
-            unSelectedIcon = Icons.Outlined.Favorite,
-
-            ),
+//        BottomNavigationItems(
+//            title = "Favourites",
+//            selectedIcon = Icons.Filled.Favorite,
+//            unSelectedIcon = Icons.Outlined.Favorite,
+//
+//            ),
         BottomNavigationItems(
             title = "Weather",
             selectedIcon = Icons.Filled.WbSunny,
@@ -125,9 +125,9 @@ fun HomeScreen(signInViewModel: SignInViewModel = SignInViewModel()) {
                 composable("Apmc Prices") {
                     ApmcScreen()
                 }
-                composable("Favourites") {
-                    FavouriteScreen()
-                }
+//                composable("Favourites") {
+//                    FavouriteScreen()
+//                }
             }
         }
 

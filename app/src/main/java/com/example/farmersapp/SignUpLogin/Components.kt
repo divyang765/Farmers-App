@@ -385,7 +385,7 @@ fun MainScreenTopCard(value: String) {
                 contentDescription = ""
             )
             Text(
-                text = "Online Farmers",
+                text = "AgriConnect",
                 style = TextStyle(Color.White, fontSize = 35.sp, fontWeight = FontWeight.Bold),
 
                 )
