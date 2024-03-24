@@ -1,6 +1,8 @@
 package com.example.farmersapp.SignUpLogin.Screens
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -27,6 +29,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -34,6 +37,7 @@ import androidx.navigation.compose.rememberNavController
 
 
 import com.example.farmersapp.App.Screen
+import com.example.farmersapp.NewsApp.Activity.NewsDetailsActivity
 import com.example.farmersapp.NewsApp.Screens.ApmcScreen
 import com.example.farmersapp.NewsApp.Screens.FavouriteScreen
 import com.example.farmersapp.NewsApp.Screens.NewsScreen
@@ -43,10 +47,12 @@ import com.example.farmersapp.NewsApp.models.NewsViewModel
 import com.example.farmersapp.SignUpLogin.ButtonComponent
 import com.example.farmersapp.SignUpLogin.HeadingTextComponent
 import com.example.farmersapp.SignUpLogin.ViewModels.SignInViewModel
+import com.example.farmersapp.WeatherApp.WeatherActivity
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun HomeScreen(signInViewModel: SignInViewModel = SignInViewModel()) {
+    val context = LocalContext.current
 
     val items = listOf(
         BottomNavigationItems(
@@ -121,6 +127,12 @@ fun HomeScreen(signInViewModel: SignInViewModel = SignInViewModel()) {
                 }
                 composable("Weather") {
                     WeatherScreen()
+//                    val intent = Intent(context, WeatherActivity::class.java).apply {
+//
+//                    }
+//                    context.startActivity(intent)
+
+
                 }
                 composable("Apmc Prices") {
                     ApmcScreen()
