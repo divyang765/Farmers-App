@@ -52,7 +52,7 @@ import com.example.farmersapp.WeatherApp.WeatherActivity
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun HomeScreen(signInViewModel: SignInViewModel = SignInViewModel()) {
-    val context = LocalContext.current
+
 
     val items = listOf(
         BottomNavigationItems(
@@ -127,10 +127,6 @@ fun HomeScreen(signInViewModel: SignInViewModel = SignInViewModel()) {
                 }
                 composable("Weather") {
                     WeatherScreen()
-//                    val intent = Intent(context, WeatherActivity::class.java).apply {
-//
-//                    }
-//                    context.startActivity(intent)
 
 
                 }
