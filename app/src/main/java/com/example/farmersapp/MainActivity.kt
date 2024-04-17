@@ -16,12 +16,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.animation.doOnEnd
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.example.farmersapp.ApmcPrices.ApmcViewModel
 import com.example.farmersapp.App.FarmersApp
 import com.example.farmersapp.SplashScreen.MainViewModel
 import com.example.farmersapp.ui.theme.FarmersAppTheme
 
 class MainActivity : ComponentActivity() {
     private val viewModel by viewModels<MainViewModel>()
+    val apmcViewModel: ApmcViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen().apply {
@@ -71,17 +73,11 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    FarmersApp()
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    FarmersAppTheme {
-        Greeting("Android")
+    @Composable
+    fun Greeting(name: String, modifier: Modifier = Modifier) {
+        FarmersApp(apmcViewModel)
     }
+
 }
+
+

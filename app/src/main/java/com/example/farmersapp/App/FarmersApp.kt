@@ -6,6 +6,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import com.example.farmersapp.ApmcPrices.ApmcViewModel
 import com.example.farmersapp.SignUpLogin.Screens.HomeScreen
 import com.example.farmersapp.SignUpLogin.Screens.LoginScreen
 import com.example.farmersapp.SignUpLogin.Screens.MainScreen
@@ -14,7 +15,7 @@ import com.example.farmersapp.SignUpLogin.Screens.SignUpScreen
 
 @Composable
 
-fun FarmersApp() {
+fun FarmersApp(viewModel: ApmcViewModel) {
 
     Surface(modifier = Modifier.fillMaxSize(), color = Color.White) {
         Crossfade(targetState = FarmersAppRouter.currentScreen, label = "") { currentState ->
@@ -28,7 +29,7 @@ fun FarmersApp() {
                 }
 
                 is Screen.HomeScreen -> {
-                    HomeScreen()
+                    HomeScreen(viewModel)
                 }
 
                 is Screen.MainScreen -> {

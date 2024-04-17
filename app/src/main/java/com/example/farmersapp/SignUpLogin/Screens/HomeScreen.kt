@@ -34,6 +34,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.farmersapp.ApmcPrices.ApmcViewModel
 
 
 import com.example.farmersapp.App.Screen
@@ -51,7 +52,7 @@ import com.example.farmersapp.WeatherApp.WeatherActivity
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun HomeScreen(signInViewModel: SignInViewModel = SignInViewModel()) {
+fun HomeScreen(viewModel: ApmcViewModel) {
 
 
     val items = listOf(
@@ -131,7 +132,7 @@ fun HomeScreen(signInViewModel: SignInViewModel = SignInViewModel()) {
 
                 }
                 composable("Apmc Prices") {
-                    ApmcScreen()
+                    ApmcScreen(viewModel)
                 }
 //                composable("Favourites") {
 //                    FavouriteScreen()
