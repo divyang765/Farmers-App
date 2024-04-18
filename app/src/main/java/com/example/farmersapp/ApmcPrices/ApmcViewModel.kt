@@ -34,7 +34,8 @@ class ApmcViewModel : ViewModel() {
                         commodity = apmcJsonObject.getString("commodity"),
                         min_price = apmcJsonObject.getString("min_price"),
                         max_price = apmcJsonObject.getString("max_price"),
-                        modal_price = apmcJsonObject.getString("modal_price")
+                        modal_price = apmcJsonObject.getString("modal_price"),
+                        arrival_date = apmcJsonObject.getString("arrival_date")
                     )
                     apmcList.add(apmcRecords)
                     _ApmcData.value = apmcList

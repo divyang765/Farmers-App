@@ -56,7 +56,6 @@ import com.example.farmersapp.NewsApp.models.NewsViewModel
 fun NewsScreen(viewModel: NewsViewModel) {
 
 
-    val context = LocalContext.current
     Column(
         modifier = Modifier
             .fillMaxSize()

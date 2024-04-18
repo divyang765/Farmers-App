@@ -1,11 +1,19 @@
 package com.example.farmersapp.NewsApp.Screens
 
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
@@ -19,6 +27,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -39,24 +49,91 @@ fun ApmcScreen(viewModel: ApmcViewModel) {
 
 @Composable
 fun ShowApmcData(apmcRecords: List<ApmcRecords>, viewModel: ApmcViewModel) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color(7, 63, 44, 255))
+            .padding(5.dp)
 
-
-    Column {
-        DropDown(viewModel)
-
-        LazyColumn {
-            items(apmcRecords) {
-                Row {
-                    Text(text = it.state, style = TextStyle(fontSize = 12.sp))
-                    Text(text = it.district, style = TextStyle(fontSize = 12.sp))
-                    Text(text = it.commodity, style = TextStyle(fontSize = 12.sp))
-                    Text(text = it.min_price, style = TextStyle(fontSize = 12.sp))
-
-                }
-
+    ) {
+        Column {
+            DropDown(viewModel)
+            Row(
+                horizontalArrangement = Arrangement.SpaceEvenly,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 10.dp)
+            ) {
+                Text(
+                    text = "District",
+                    modifier = Modifier.padding(horizontal = 5.dp),
+                    style = TextStyle(color = Color.White, fontWeight = FontWeight.Bold)
+                )
+                Text(
+                    text = "Crop",
+                    modifier = Modifier.padding(horizontal = 5.dp),
+                    style = TextStyle(color = Color.White, fontWeight = FontWeight.Bold)
+                )
+                Text(
+                    text = "Price",
+                    modifier = Modifier.padding(horizontal = 5.dp),
+                    style = TextStyle(color = Color.White, fontWeight = FontWeight.Bold)
+                )
             }
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .border(BorderStroke(3.dp, Color.White))
+                    .padding(vertical = 15.dp)
+            ) {
+                LazyColumn {
+
+                    items(apmcRecords) {
+                        Row(
+                            horizontalArrangement = Arrangement.SpaceEvenly,
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(vertical = 15.dp)
+                        ) {
+
+                            Text(
+                                text = it.district,
+                                style = TextStyle(
+                                    fontSize = 15.sp,
+                                    color = Color.White,
+                                    fontWeight = FontWeight.Bold
+                                ),
+
+                                )
+                            Text(
+                                text = it.commodity,
+                                style = TextStyle(
+                                    fontSize = 15.sp,
+                                    color = Color.White,
+                                    fontWeight = FontWeight.Bold
+                                ),
+
+                                )
+                            Text(
+                                text = it.min_price,
+                                style = TextStyle(
+                                    fontSize = 15.sp,
+                                    color = Color.White,
+                                    fontWeight = FontWeight.Bold
+                                ),
+
+                                )
+
+
+                        }
+
+                    }
+                }
+            }
+
         }
     }
+
 
 }
 
@@ -90,7 +167,7 @@ fun DropDown(viewModel: ApmcViewModel) {
         "West Bengal"
     )
     var selectedText by remember {
-        mutableStateOf(list[2])
+        mutableStateOf(list[1])
     }
     var isExpanded by remember {
         mutableStateOf(false)
@@ -122,7 +199,9 @@ fun DropDown(viewModel: ApmcViewModel) {
 
 
             )
-            ExposedDropdownMenu(expanded = isExpanded, onDismissRequest = { isExpanded = false }) {
+            ExposedDropdownMenu(
+                expanded = isExpanded,
+                onDismissRequest = { isExpanded = false }) {
                 list.forEachIndexed { index, text ->
                     DropdownMenuItem(
                         text = { Text(text = text) },
@@ -136,6 +215,9 @@ fun DropDown(viewModel: ApmcViewModel) {
                 }
             }
         }
-        Text(text = "CurrentlySelected: $selectedText")
+        Text(
+            text = "Latest Prices for : $selectedText",
+            style = TextStyle(color = Color.White, fontSize = 15.sp, fontWeight = FontWeight.Bold)
+        )
     }
 }

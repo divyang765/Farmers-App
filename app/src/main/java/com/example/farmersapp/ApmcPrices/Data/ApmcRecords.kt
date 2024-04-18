@@ -7,5 +7,6 @@ data class ApmcRecords(
     val commodity: String,
     val min_price: String,
     val max_price: String,
-    val modal_price: String
+    val modal_price: String,
+    val arrival_date: String
 )
